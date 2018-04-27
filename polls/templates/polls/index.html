@@ -1,0 +1,30 @@
+{% extends 'polls/layout.html' %}
+
+{% block content %}
+{% if latest_question_list %}
+        <ul class="collection">
+            {% for question in latest_question_list %}
+                <li class="collection-item">
+                    <h4>
+                        <a href="/polls/details/{{question.id}}">
+                                {{ question.question_text }}
+                        </a>
+                    </h4>
+                </li>
+            {% endfor %}
+        </ul>
+{% else %}
+    <div class="card">
+        <div class="card-action">
+                <h1>
+                    We're Sorry. 
+                    No polls are available at the moment.
+                </h1>
+        </div>
+    </div>
+{% endif %}
+
+<a class="btn" href="/admin">Admin Login
+    <i class="material-icons right">face</i>
+</a>
+{% endblock content %}

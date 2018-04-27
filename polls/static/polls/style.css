@@ -1,0 +1,15 @@
+h1 {
+    color: #80cbc4; 
+}
+
+a {
+    color: black;
+}
+
+html {
+    background: url("images/background.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

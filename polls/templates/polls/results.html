@@ -1,0 +1,27 @@
+{% extends 'polls/layout.html' %}
+
+{% block content %}
+    <h4 class="center-align teal lighten-3">
+        {{ question.question_text }}
+    </h4>
+
+    <div class="card">
+        <div class="card-content">
+            <ul>
+                {% for choice in question.choice_set.all %}
+                    <li>
+                        {{ choice.choice_text }} -- {{ choice.votes }} 
+                        vote{{ choice.votes|pluralize }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <a class="btn" href="{% url 'polls:detail' question.id %}">
+        Vote again?
+    </a>
+    <a href="/polls" class="btn">Go Back to Homepage
+        <i class="material-icons left">arrow_back</i>
+    </a>
+{% endblock content%}

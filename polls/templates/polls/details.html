@@ -1,0 +1,40 @@
+{% extends 'polls/layout.html' %}
+
+{% block content %}
+<h4 class="center-align teal lighten-3">
+  {{ question.question_text }}
+</h4>
+
+{% if error_message %}
+  <p class="center-align red lighten-3">
+    <strong>{{ error_message }}</strong>
+  </p>
+{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-content">
+        {% for choice in question.choice_set.all %}
+        <p>
+          <label for="choice{{ forloop.counter }}">
+            <input name="choice" class="with-gap" type="radio" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+            <span>{{ choice.choice_text }}</span>
+          </label>
+        </p>
+        {% endfor %}
+        <br>
+        <button class="btn waves-effect waves-light" type="submit" value="Vote" name="action">Vote
+            <i class="material-icons right">send</i>
+        </button>
+        <a href="/polls/details/{{ question.id }}/results" class="btn waves-effect waves-light">Results
+            <i class="material-icons right">poll</i>
+        </a>
+      </div>
+    </div>
+  </form>
+
+<a href="/polls" class="btn">Go Back
+  <i class="material-icons left">arrow_back</i>
+</a>
+{% endblock content %}
